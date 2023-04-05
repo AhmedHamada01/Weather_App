@@ -22,6 +22,9 @@ class SearchScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
+            onChanged: (data){
+              cityName = data;
+            },
             onSubmitted: (data)async{
               cityName = data;
 
@@ -41,9 +44,21 @@ class SearchScreen extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              suffixIcon: Icon(
-                  Icons.search,
-                color: Colors.black,
+              suffixIcon: InkWell(
+                onTap: () async{
+                  WeatherService service = WeatherService();
+                  WeatherModel weather = await service.getWeather(cityName: cityName!);
+
+                  Provider.of<weatherProvider>(context,listen: false).weatherData = weather;
+                  Provider.of<weatherProvider>(context,listen: false).cityName = cityName!;
+
+
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                    Icons.search,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
