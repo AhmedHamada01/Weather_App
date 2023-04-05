@@ -65,7 +65,16 @@ class _HomescreenState extends State<Homescreen> {
           ],
         ),
       ) : Container(
-        color: weatherData!.getThemeColor(),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [
+                weatherData!.getThemeColor(),
+                weatherData!.getThemeColor()[50]!,
+              ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:  [
@@ -77,8 +86,11 @@ class _HomescreenState extends State<Homescreen> {
                 fontWeight: FontWeight.bold
               ),
             ),
+            SizedBox(
+              height: 15.0,
+            ),
             Text(
-              " Updated : ",
+              " Updated : ${weatherData!.date} ",
               style: TextStyle(
                   fontSize: 20.0,
                 fontWeight: FontWeight.w400
