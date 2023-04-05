@@ -29,7 +29,7 @@ class SearchScreen extends StatelessWidget {
               cityName = data;
 
               WeatherService service = WeatherService();
-             WeatherModel weather = await service.getWeather(cityName: cityName!);
+             WeatherModel ?weather = await service.getWeather(cityName: cityName!);
 
              Provider.of<weatherProvider>(context,listen: false).weatherData = weather;
               Provider.of<weatherProvider>(context,listen: false).cityName = cityName!;
@@ -47,7 +47,7 @@ class SearchScreen extends StatelessWidget {
               suffixIcon: InkWell(
                 onTap: () async{
                   WeatherService service = WeatherService();
-                  WeatherModel weather = await service.getWeather(cityName: cityName!);
+                  WeatherModel ?weather = await service.getWeather(cityName: cityName!);
 
                   Provider.of<weatherProvider>(context,listen: false).weatherData = weather;
                   Provider.of<weatherProvider>(context,listen: false).cityName = cityName!;
